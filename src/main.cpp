@@ -5,10 +5,10 @@
 #define PIN3    32
 #define PIN4    25
 
-#define COMMAND1    "FIRST"
-#define COMMAND2    "HOME"
-#define COMMAND3    "FIRST"
-#define COMMAND4    "HOME"
+#define COMMAND1    "A"
+#define COMMAND2    "B"
+#define COMMAND3    "C"
+#define COMMAND4    "D"
 
 #define DEBOUNCE_DELAY 500
 
@@ -23,7 +23,8 @@ void readPins(){
   for (int i = 0; i < 4; i++) {
     if (digitalRead(pins[i]) == LOW) {
       if (millis() - lastUpdateMillis < DEBOUNCE_DELAY) { return; }
-      Serial2.println(commands[i]);
+      Serial.println();
+      Serial.println(commands[i]);
       if (DEBUG) { Serial.println("Pin " + String(i) + " pressed, sending command: " + commands[i]);} 
       lastUpdateMillis = millis();
     }
@@ -38,7 +39,6 @@ void io_init() {
 
 void setup() {
   Serial.begin(9600);
-  Serial2.begin(9600);
   io_init();
 }
 
